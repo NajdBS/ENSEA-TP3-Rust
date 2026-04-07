@@ -15,9 +15,9 @@ use tp3::bsp_ensea::Board;
 use tp3::encoder::Encoder;
 use tp3::gamepad::Gamepad;
 use tp3::shared::{
-    load_direction, store_direction, BARGRAPH_LEVEL, EMERGENCY_STOP, ENCODER_POSITION,
-    GAMEPAD_BOTTOM, GAMEPAD_CENTER, GAMEPAD_LEFT, GAMEPAD_RIGHT, GAMEPAD_TOP, STEPPER_SIGNAL,
-    STEPPER_SPEED,
+    load_direction, store_direction, BARGRAPH_LEVEL, EMERGENCY_STOP, ENCODER_MUTEX,
+    ENCODER_POSITION, GAMEPAD_BOTTOM, GAMEPAD_CENTER, GAMEPAD_LEFT, GAMEPAD_RIGHT,
+    GAMEPAD_TOP, STEPPER_SIGNAL, STEPPER_SPEED,
 };
 use tp3::stepper::{Direction, MicrosteppingMode, Stepper};
 
@@ -45,12 +45,19 @@ async fn gamepad_task(gamepad: Gamepad) {
 
 #[embassy_executor::task]
 async fn encoder_task(encoder: Encoder) {
-    let mut last_pos = encoder.position();
+    let mut last_pos = {
+        let _lock = ENCODER_MUTEX.lock().await;
+        encoder.position()
+    };
 
     loop {
-        Timer::after(Duration::from_millis(200)).await;
+        Timer::after(Duration::from_millis(50)).await;
 
-        let pos = encoder.position();
+        let pos = {
+            let _lock = ENCODER_MUTEX.lock().await;
+            encoder.position()
+        };
+
         ENCODER_POSITION.store(pos, Ordering::Relaxed);
 
         let delta = pos - last_pos;
@@ -100,7 +107,10 @@ async fn emergency_stop_task(button_pin: embassy_stm32::Peri<'static, AnyPin>) {
             STEPPER_SPEED.store(0, Ordering::Relaxed);
             STEPPER_SIGNAL.signal(());
 
-            embassy_stm32::pac::TIM2.cnt().write_value(5_000);
+            {
+                let _lock = ENCODER_MUTEX.lock().await;
+                embassy_stm32::pac::TIM2.cnt().write_value(5_000);
+            }
 
             ENCODER_POSITION.store(0, Ordering::Relaxed);
             Bargraph::<8>::update_value(0);
@@ -133,7 +143,7 @@ async fn main(spawner: Spawner) {
 
     loop {
         info!(
-            "enc={} bar={} speed={} dir={:?} estop={} gp:[t={} b={} l={} r={} c={}]",
+            "enc={} bar={} speed={} direction={:?} estop={} gp:[top={} bottom={} left={} right={} center={}]",
             ENCODER_POSITION.load(Ordering::Relaxed),
             BARGRAPH_LEVEL.load(Ordering::Relaxed),
             STEPPER_SPEED.load(Ordering::Relaxed),

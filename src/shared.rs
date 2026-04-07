@@ -1,7 +1,7 @@
-// src/shared.rs
 use core::sync::atomic::{AtomicBool, AtomicI32, AtomicU8, AtomicU32, Ordering};
 
 use embassy_sync::blocking_mutex::raw::CriticalSectionRawMutex;
+use embassy_sync::mutex::Mutex;
 use embassy_sync::signal::Signal;
 
 use crate::stepper::Direction;
@@ -10,6 +10,8 @@ pub static BARGRAPH_LEVEL: AtomicU32 = AtomicU32::new(0);
 pub static BARGRAPH_SIGNAL: Signal<CriticalSectionRawMutex, ()> = Signal::new();
 
 pub static ENCODER_POSITION: AtomicI32 = AtomicI32::new(0);
+
+pub static ENCODER_MUTEX: Mutex<CriticalSectionRawMutex, ()> = Mutex::new(());
 
 pub static STEPPER_SPEED: AtomicU32 = AtomicU32::new(0);
 pub static STEPPER_DIRECTION_RAW: AtomicU8 = AtomicU8::new(0);

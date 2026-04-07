@@ -1,3 +1,0 @@
-cargo:rustc-link-search=D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\debug\build\defmt-18d716eb96ead2ad\out
-cargo:rustc-check-cfg=cfg(c_variadic)
-cargo:rustc-check-cfg=cfg(no_cas)
