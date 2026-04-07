@@ -1,0 +1,181 @@
+   0.103746100s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("tp3", ["lib"], "D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\lib.rs", Edition2024) }
+   0.103786600s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-e5854bf540e44be7\test-lib-tp3`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.110532700s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="bargraph_example"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name: "bargraph_example", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\bin\\bargraph_example.rs", Edition2024) }
+   0.110553900s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="bargraph_example"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-3669f0da248aceb5\test-bin-bargraph_example`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.111331800s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="encoder_example"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name: "encoder_example", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\bin\\encoder_example.rs", Edition2024) }
+   0.111344400s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="encoder_example"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-4cda0c96953acdc2\test-bin-encoder_example`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.112030000s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="gamepad_example"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name: "gamepad_example", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\bin\\gamepad_example.rs", Edition2024) }
+   0.112042400s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="gamepad_example"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-61f0c3e87fbeb17a\test-bin-gamepad_example`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.112747700s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="stepper_example"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name: "stepper_example", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\bin\\stepper_example.rs", Edition2024) }
+   0.112759500s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="stepper_example"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-80ea135064b99f4f\test-bin-stepper_example`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.113229800s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint: stale: changed "D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\main.rs"
+   0.113240800s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint:           (vs) "D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\target\\thumbv7em-none-eabihf\\debug\\.fingerprint\\tp3-4535dc30db323b1f\\dep-bin-tp3"
+   0.113245100s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 13420024915, nanos: 616605900 } < FileTime { seconds: 13420024917, nanos: 230842900 }
+   0.113330100s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint: fingerprint dirty for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: false }/TargetInner { name: "tp3", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\main.rs", Edition2024) }
+   0.113338700s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\target\\thumbv7em-none-eabihf\\debug\\.fingerprint\\tp3-4535dc30db323b1f\\dep-bin-tp3", reference_mtime: FileTime { seconds: 13420024915, nanos: 616605900 }, stale: "D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\main.rs", stale_mtime: FileTime { seconds: 13420024917, nanos: 230842900 } }))
+   0.113845200s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint: fingerprint error for tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)/Check { test: true }/TargetInner { name: "tp3", doc: true, ..: with_path("D:\\VM\\RustLab2026 TP\\ensea\\ENSEA-TP3-Rust\\src\\main.rs", Edition2024) }
+   0.113857900s  INFO prepare_target{force=false package_id=tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust) target="tp3"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\.fingerprint\tp3-3890631ec3459af3\test-bin-tp3`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+    Checking tp3 v0.1.0 (D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust)
+error: could not compile `tp3` (bin "stepper_example" test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `tp3` (bin "bargraph_example" test) due to 1 previous error
+error: could not compile `tp3` (bin "encoder_example" test) due to 1 previous error
+error: could not compile `tp3` (bin "gamepad_example" test) due to 1 previous error
+error: could not compile `tp3` (lib test) due to 2 previous errors
+error: could not compile `tp3` (bin "tp3" test) due to 1 previous error

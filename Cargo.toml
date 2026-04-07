@@ -7,6 +7,14 @@ edition = "2024"
 name = "bargraph_example"
 path = "src/bin/bargraph_example.rs"
 
+[[bin]]
+name = "gamepad_example"
+path = "src/bin/gamepad_example.rs"
+
+[[bin]]
+name = "encoder_example"
+path = "src/bin/encoder_example.rs"
+
 [dependencies]
 cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7.5"

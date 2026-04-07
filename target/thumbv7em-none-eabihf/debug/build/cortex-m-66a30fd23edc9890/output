@@ -1,0 +1,6 @@
+cargo:rustc-link-lib=static=cortex-m
+cargo:rustc-link-search=D:\VM\RustLab2026 TP\ensea\ENSEA-TP3-Rust\target\thumbv7em-none-eabihf\debug\build\cortex-m-66a30fd23edc9890\out
+cargo:rustc-cfg=cortex_m
+cargo:rustc-cfg=armv7m
+cargo:rustc-cfg=armv7em
+cargo:rustc-cfg=has_fpu

@@ -1,3 +1,4 @@
+// src/bsp_ensea.rs
 #![allow(dead_code)]
 
 use embassy_stm32::gpio::AnyPin;
@@ -30,8 +31,37 @@ impl BargraphPins {
     }
 }
 
+/// Gamepad 5 boutons
+pub struct GamepadPins {
+    pub top: Peri<'static, AnyPin>,    // PC8
+    pub bottom: Peri<'static, AnyPin>, // PB11
+    pub right: Peri<'static, AnyPin>,  // PC9
+    pub left: Peri<'static, AnyPin>,   // PC6
+    pub center: Peri<'static, AnyPin>, // PC5
+}
+
+/// Encodeur rotatif
+pub struct EncoderPins {
+    pub tim2: Peri<'static, embassy_stm32::peripherals::TIM2>,
+    pub pin_a: Peri<'static, embassy_stm32::peripherals::PA0>,
+    pub pin_b: Peri<'static, embassy_stm32::peripherals::PA1>,
+    pub btn: Peri<'static, AnyPin>, // PA15
+}
+
+/// Moteur pas à pas
+pub struct StepperPins {
+    pub dir: Peri<'static, AnyPin>,  // PA7
+    pub ms1: Peri<'static, AnyPin>,  // PA11
+    pub ms2: Peri<'static, AnyPin>,  // PB12
+    pub enn: Peri<'static, AnyPin>,  // PA12
+    pub step: Peri<'static, AnyPin>, // PA6
+}
+
 pub struct Board {
     pub bargraph: BargraphPins,
+    pub gamepad: GamepadPins,
+    pub encoder: EncoderPins,
+    pub stepper: StepperPins,
 }
 
 impl Board {
@@ -46,6 +76,26 @@ impl Board {
                 led5: p.PB4.into(),
                 led6: p.PB14.into(),
                 led7: p.PB5.into(),
+            },
+            gamepad: GamepadPins {
+                top: p.PC8.into(),
+                bottom: p.PB11.into(),
+                right: p.PC9.into(),
+                left: p.PC6.into(),
+                center: p.PC5.into(),
+            },
+            encoder: EncoderPins {
+                tim2: p.TIM2,
+                pin_a: p.PA0,
+                pin_b: p.PA1,
+                btn: p.PA15.into(),
+            },
+            stepper: StepperPins {
+                dir: p.PA7.into(),
+                ms1: p.PA11.into(),
+                ms2: p.PB12.into(),
+                enn: p.PA12.into(),
+                step: p.PA6.into(),
             },
         }
     }

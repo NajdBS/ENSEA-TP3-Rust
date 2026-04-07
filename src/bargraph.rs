@@ -1,67 +1,68 @@
-use core::cmp::min;
+// src/bargraph.rs
+use core::sync::atomic::Ordering;
+
 use embassy_stm32::gpio::{AnyPin, Level, Output, Speed};
 use embassy_stm32::Peri;
 
+use crate::shared::{BARGRAPH_LEVEL, BARGRAPH_SIGNAL};
+
 pub struct Bargraph<const N: usize> {
     leds: [Output<'static>; N],
-    min: i32,
-    max: i32,
+    min: u32,
+    max: u32,
 }
 
 impl<const N: usize> Bargraph<N> {
     pub fn new(pins: [Peri<'static, AnyPin>; N]) -> Self {
-        // Level::High = LED OFF (active-low)
-        let leds = pins.map(|pin| Output::new(pin, Level::High, Speed::Low));
+        let leds = pins.map(|pin| Output::new(pin, Level::Low, Speed::Low));
+
         Self {
             leds,
             min: 0,
-            max: N as i32,
+            max: 100,
         }
     }
 
-    pub fn set_range(&mut self, min_value: i32, max_value: i32) {
-        assert!(min_value < max_value);
-        self.min = min_value;
-        self.max = max_value;
+    pub fn set_range(&mut self, min: u32, max: u32) {
+        self.min = min;
+        self.max = max.max(min + 1);
     }
 
-    pub fn clear(&mut self) {
-        for led in &mut self.leds {
-            led.set_high(); // active-low: HIGH = OFF
+    pub fn set_value(&mut self, value: u32) {
+        let value = value.clamp(self.min, self.max);
+        let span = self.max - self.min;
+        let rel = value - self.min;
+
+        let lit = if rel == 0 {
+            0
+        } else {
+            (((rel as usize) * N) + (span as usize) - 1) / (span as usize)
         }
-    }
+        .min(N);
 
-    pub fn fill(&mut self) {
-        for led in &mut self.leds {
-            led.set_low(); // active-low: LOW = ON
-        }
-    }
-
-    pub fn set_led_count(&mut self, count: usize) {
-        let count = min(count, N);
-        for i in 0..N {
-            if i < count {
-                self.leds[i].set_low();  // active-low: ON
+        for (index, led) in self.leds.iter_mut().enumerate() {
+            if index < lit {
+                led.set_high();
             } else {
-                self.leds[i].set_high(); // active-low: OFF
+                led.set_low();
             }
         }
     }
 
-    pub fn set_value(&mut self, value: i32) {
-        let count = self.value_to_led_count(value);
-        self.set_led_count(count);
+    pub fn clear(&mut self) {
+        for led in self.leds.iter_mut() {
+            led.set_low();
+        }
     }
 
-    fn value_to_led_count(&self, value: i32) -> usize {
-        if value <= self.min {
-            return 0;
-        }
-        if value >= self.max {
-            return N;
-        }
-        let span = (self.max - self.min) as i64;
-        let offset = (value - self.min) as i64;
-        ((offset * N as i64) / span) as usize
+    pub fn update_value(new_value: u32) {
+        BARGRAPH_LEVEL.store(new_value, Ordering::Relaxed);
+        BARGRAPH_SIGNAL.signal(());
+    }
+
+    pub async fn wait_and_update(&mut self) {
+        BARGRAPH_SIGNAL.wait().await;
+        let value = BARGRAPH_LEVEL.load(Ordering::Relaxed);
+        self.set_value(value);
     }
 }

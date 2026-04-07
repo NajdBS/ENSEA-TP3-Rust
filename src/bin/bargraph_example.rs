@@ -1,7 +1,7 @@
 #![no_main]
 #![no_std]
 
-use defmt::info;
+use defmt::*;
 use embassy_executor::Spawner;
 use embassy_stm32::Config;
 use embassy_time::{Duration, Timer};
@@ -18,19 +18,17 @@ async fn main(_spawner: Spawner) {
     let mut bargraph = Bargraph::<8>::new(board.bargraph.into_array());
     bargraph.set_range(0, 100);
 
-    info!("Bargraph example started");
-
     loop {
-        for value in (0..=100).step_by(5) {
-            info!("value = {}", value);
-            bargraph.set_value(value);
-            Timer::after(Duration::from_millis(100)).await;
+        for v in (0..=100).step_by(10) {
+            info!("bargraph value={}", v);
+            bargraph.set_value(v);
+            Timer::after(Duration::from_millis(250)).await;
         }
 
-        for value in (0..=100).rev().step_by(5) {
-            info!("value = {}", value);
-            bargraph.set_value(value);
-            Timer::after(Duration::from_millis(100)).await;
+        for v in (0..=100).rev().step_by(10) {
+            info!("bargraph value={}", v);
+            bargraph.set_value(v);
+            Timer::after(Duration::from_millis(250)).await;
         }
     }
 }
