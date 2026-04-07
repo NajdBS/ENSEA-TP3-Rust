@@ -63,6 +63,10 @@ async fn encoder_task(encoder: Encoder) {
         let delta = pos - last_pos;
         last_pos = pos;
 
+        if EMERGENCY_STOP.load(Ordering::Relaxed) {
+            continue;
+        }
+
         if delta != 0 {
             let direction = if delta > 0 {
                 Direction::Clockwise
@@ -70,10 +74,9 @@ async fn encoder_task(encoder: Encoder) {
                 Direction::CounterClockwise
             };
 
-            // vitesse fixe pour test
+            // test
             let speed = 500;
 
-            EMERGENCY_STOP.store(false, Ordering::Relaxed);
             store_direction(direction);
             STEPPER_SPEED.store(speed, Ordering::Relaxed);
             STEPPER_SIGNAL.signal(());

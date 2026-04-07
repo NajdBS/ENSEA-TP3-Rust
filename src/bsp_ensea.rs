@@ -1,4 +1,3 @@
-// src/bsp_ensea.rs
 #![allow(dead_code)]
 
 use embassy_stm32::gpio::AnyPin;

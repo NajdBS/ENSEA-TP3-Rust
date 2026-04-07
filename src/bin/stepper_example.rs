@@ -23,7 +23,7 @@ async fn main(_spawner: Spawner) {
         stepper.set_speed(200, Direction::Clockwise);
         stepper.enable();
         for _ in 0..200 {
-            stepper.pulse();
+            stepper.pulse().await;
             Timer::after(Duration::from_millis(5)).await;
         }
         stepper.disable();
@@ -34,7 +34,7 @@ async fn main(_spawner: Spawner) {
         stepper.set_speed(200, Direction::CounterClockwise);
         stepper.enable();
         for _ in 0..200 {
-            stepper.pulse();
+            stepper.pulse().await;
             Timer::after(Duration::from_millis(5)).await;
         }
         stepper.disable();

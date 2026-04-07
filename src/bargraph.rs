@@ -1,4 +1,3 @@
-// src/bargraph.rs
 use core::sync::atomic::Ordering;
 
 use embassy_stm32::gpio::{AnyPin, Level, Output, Speed};

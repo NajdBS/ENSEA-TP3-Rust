@@ -1,4 +1,4 @@
-// src/encoder.rs
+
 use embassy_stm32::timer::qei::{Config, Qei};
 use embassy_stm32::Peri;
 
