@@ -3,8 +3,9 @@ use core::sync::atomic::Ordering;
 use defmt::Format;
 use embassy_stm32::gpio::{AnyPin, Level, Output, Speed};
 use embassy_stm32::Peri;
+use embassy_time::{Duration, Timer};
 
-use crate::shared::{load_direction, EMERGENCY_STOP, STEPPER_SIGNAL, STEPPER_SPEED};
+use crate::shared::{load_direction, EMERGENCY_STOP, STEPPER_SPEED};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Format)]
 pub enum Direction {
@@ -39,12 +40,12 @@ impl Stepper {
         step: Peri<'static, AnyPin>,
     ) -> Self {
         let mut s = Self {
-            dir: Output::new(dir, Level::Low, Speed::Medium),
+            dir: Output::new(dir, Level::Low, Speed::VeryHigh),
             ms1: Output::new(ms1, Level::Low, Speed::Medium),
             ms2: Output::new(ms2, Level::Low, Speed::Medium),
             enn: Output::new(enn, Level::High, Speed::Medium),
-            step: Output::new(step, Level::Low, Speed::Medium),
-            speed_hz: 0,
+            step: Output::new(step, Level::Low, Speed::VeryHigh),
+            speed_hz: 500,
             direction: Direction::Clockwise,
         };
 
@@ -58,7 +59,7 @@ impl Stepper {
     }
 
     pub fn set_speed(&mut self, speed_hz: u32, direction: Direction) {
-        self.speed_hz = speed_hz;
+        self.speed_hz = speed_hz.max(1);
         self.direction = direction;
 
         match direction {
@@ -96,25 +97,37 @@ impl Stepper {
         }
     }
 
-    pub fn pulse(&mut self) {
+    pub async fn pulse(&mut self) {
         self.step.set_high();
-        cortex_m::asm::delay(800);
+        Timer::after(Duration::from_micros(500)).await;
         self.step.set_low();
+        Timer::after(Duration::from_micros(500)).await;
     }
 
-    pub async fn wait_for_update(&mut self) {
-        STEPPER_SIGNAL.wait().await;
+    pub async fn run_continuous(&mut self) {
+        loop {
+            if EMERGENCY_STOP.load(Ordering::Relaxed) {
+                self.disable();
+                Timer::after(Duration::from_millis(10)).await;
+                continue;
+            }
 
-        let speed = STEPPER_SPEED.load(Ordering::Relaxed);
-        let direction = load_direction();
+            let speed = STEPPER_SPEED.load(Ordering::Relaxed);
+            let direction = load_direction();
 
-        if EMERGENCY_STOP.load(Ordering::Relaxed) || speed == 0 {
-            self.disable();
-            return;
+            if speed == 0 {
+                self.disable();
+                Timer::after(Duration::from_millis(10)).await;
+                continue;
+            }
+
+            self.set_speed(speed, direction);
+            self.enable();
+
+            self.pulse().await;
+
+            let period_us = (1_000_000u32 / self.speed_hz.max(1)).max(2000);
+            Timer::after(Duration::from_micros(period_us as u64)).await;
         }
-
-        self.set_speed(speed, direction);
-        self.enable();
-        self.pulse();
     }
 }

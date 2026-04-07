@@ -57,11 +57,19 @@ pub struct StepperPins {
     pub step: Peri<'static, AnyPin>, // PA6
 }
 
+/// Bus I2C1 utilisé par l'écran OLED SSD1306
+pub struct I2c1Pins {
+    pub i2c: Peri<'static, embassy_stm32::peripherals::I2C1>,
+    pub scl: Peri<'static, embassy_stm32::peripherals::PB6>,
+    pub sda: Peri<'static, embassy_stm32::peripherals::PB7>,
+}
+
 pub struct Board {
     pub bargraph: BargraphPins,
     pub gamepad: GamepadPins,
     pub encoder: EncoderPins,
     pub stepper: StepperPins,
+    pub i2c1: I2c1Pins,
 }
 
 impl Board {
@@ -96,6 +104,11 @@ impl Board {
                 ms2: p.PB12.into(),
                 enn: p.PA12.into(),
                 step: p.PA6.into(),
+            },
+            i2c1: I2c1Pins {
+                i2c: p.I2C1,
+                scl: p.PB6,
+                sda: p.PB7,
             },
         }
     }

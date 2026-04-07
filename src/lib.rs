@@ -6,3 +6,4 @@ pub mod encoder;
 pub mod gamepad;
 pub mod shared;
 pub mod stepper;
+pub mod oled;
